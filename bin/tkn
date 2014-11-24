@@ -3,16 +3,24 @@
 
 Encoding.default_internal = "UTF-8"
 
-require 'io/console'
 require 'active_support/core_ext/string/strip'
+require 'io/console'
 require 'pygments'
+require 'rainbow/ext/string'
 
-TRANSITIONS_TIME = 0.3
-MAX_CHAR_DELAY   = 0.002
+TRANSITIONS_TIME = 0
+MAX_CHAR_DELAY   = 0
 
 #
 # --- DSL -------------------------------------------------------------
 #
+
+def heading(title)
+  title = "#{title}"
+  center <<-EOS
+    #{title}
+EOS
+end
 
 def center(content)
   slide(content, :center)
@@ -35,6 +43,10 @@ def section(title)
   yield
 end
 
+def diagram(content)
+  slide(content, :diagram)
+end
+
 def slide(content, format, *args)
   $slides << {
     content: content.strip_heredoc,
@@ -43,6 +55,10 @@ def slide(content, format, *args)
   }
 end
 
+def faux_terminal(str)
+  str = " #{str} "
+  "#{ str.inverse }#{ "_ ".blink.inverse }".inverse
+end
 
 #
 # --- ANSI Escape Sequences -------------------------------------------
@@ -73,7 +89,6 @@ end
 def b(str)
   "\e[1m#{str}\e[0m"
 end
-
 
 #
 # --- Utilities -------------------------------------------------------
@@ -146,7 +161,7 @@ def render_center(content)
       col = [1, 1 + (ncols - ansi_length(line.chomp))/2].max
       str << cursor_at(row + i, col) + line
     end
-  end  
+  end
 end
 
 # Renders a section banner.
@@ -174,14 +189,15 @@ def render_block(content)
 
   nlines = content.count("\n")
   row = [1, 1 + (nrows - nlines)/2].max
-  
+
   width = width(content)
   col = [1, 1 + (ncols - width)/2].max
-  
+
   content.gsub(/^/) do
     cursor_at(row, col).tap { row += 1 }
   end
 end
+alias :render_diagram :render_block
 
 # Renders an image in the terminal by setting it as background (only works with iTerm2).
 def render_image(image_path)
