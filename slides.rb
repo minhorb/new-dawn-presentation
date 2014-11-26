@@ -52,15 +52,15 @@ heading "Occasional guest speaker is still welcome"
 heading "More activity in the #{ "interwebs".bright }"
 
 center <<-EOS
-mailing list
+mailing list (https://groups.google.com/forum/#!forum/minhorb)
 
-twitter
+twitter (https://twitter.com/minhorb)
 
-facebook
+facebook (https://www.facebook.com/minhorb)
 
-blog
+IRC (irc.freenode.net #minhorb)
 
-IRC
+blog (non existent)
 
 ...
 EOS
