@@ -78,16 +78,19 @@ heading b("Show & Tell Hacknight")
 block <<-EOS
 #{ "Beginners:".bright }
 
-Exercism.io first exercise (http://exercism.io/)
+Exercism.io first exercise
+  (http://exercism.io/)
 
-Codewars simple exercise (http://codewars.com/kata/fizzbuzz-array-custom)
-
+Codewars simple exercise
+  (http://codewars.com/kata/fizzbuzz-array-custom)
 
 
 
 #{ "Beginners++:".bright }
 
-Codewars exercise (http://www.codewars.com/kata/can-you-get-the-loop)
+Codewars exercise
+  (http://www.codewars.com/kata/can-you-get-the-loop)
 
-Your own project (not as fun)
+Your own project
+  (not as fun)
 EOS
